@@ -3,21 +3,47 @@
 Builds a compute-heavy Core ML model and benchmarks it across Core ML compute
 units to see how the Apple Neural Engine (ANE) compares to CPU and GPU.
 
-## Setup
+## Quick start
+
+```sh
+./doit.sh
+```
+
+`doit.sh` does the whole thing end to end: it wipes any existing `.venv` and
+`exerciser.mlpackage`, runs the setup script, builds a fresh model, and prints
+the compute-unit comparison. Run it and read the summary table at the bottom.
+
+The three steps it chains together are also usable on their own, described
+below.
+
+## The pieces
+
+### 1. `setup.sh` — environment
 
 ```sh
 ./setup.sh
 source .venv/bin/activate
 ```
 
-Needs Python 3.11 and, ideally, [`uv`](https://docs.astral.sh/uv/) (the script
-falls back to `python3 -m venv` + `pip` if `uv` isn't installed).
+Creates the `.venv` and installs dependencies. Safe to re-run. Needs Python 3.11
+and, ideally, [`uv`](https://docs.astral.sh/uv/) (the script falls back to
+`python3 -m venv` + `pip` if `uv` isn't installed).
 
-## Usage
+### 2. `makemodel.py` — the model maker
 
 ```sh
 python makemodel.py   # builds exerciser.mlpackage
-python try_ane.py     # benchmarks it across CPU / GPU / Neural Engine
+```
+
+Builds the compute-heavy Core ML model — a stack of 3x3 convolutions over a
+large image, built directly with coremltools' MIL builder (no TensorFlow/Keras).
+It does nothing meaningful; it just keeps the ANE busy. Turn up the layer count
+and filter width near the top of the file to make it heavier.
+
+### 3. `try_ane.py` — the benchmark
+
+```sh
+python try_ane.py     # benchmarks exerciser.mlpackage across CPU / GPU / Neural Engine
 ```
 
 By default, `try_ane.py` runs a **60-second test** — each of the four compute

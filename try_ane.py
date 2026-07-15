@@ -9,6 +9,8 @@ back to another engine for any op the chosen one can't run:
     ALL          - GPU and Neural Engine both eligible
 
 Each mode runs for a fixed wall-clock budget (default 15s) and reports throughput.
+
+Author: Andrew Benson
 """
 
 import sys

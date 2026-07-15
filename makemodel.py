@@ -1,8 +1,10 @@
-"""Build a simple, compute-heavy Core ML model for exercising the Neural Engine.
+"""Build a compute-heavy Core ML model for exercising the Apple Neural Engine.
 
-No TensorFlow/Keras needed -- the graph is built directly with coremltools' MIL
-builder. It's just a stack of 3x3 convolutions over a largeish image, which keeps
-the ANE busy without doing anything meaningful.
+The model is a deep stack of 3x3 convolutions over a largeish image. It computes
+nothing meaningful; the point is to keep the ANE saturated so try_ane.py has
+something heavy to measure. Turn up NUM_LAYERS / FILTERS to make it heavier.
+
+Author: Andrew Benson
 """
 
 import numpy as np
