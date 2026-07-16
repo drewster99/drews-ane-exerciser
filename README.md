@@ -86,6 +86,29 @@ illustrative. Core ML treats the selected compute units as *eligible*, not
 run — so the "CPU + ANE" and "CPU + GPU + ANE" rows generally reflect the ANE
 doing most of the work.
 
+## Live ANE monitor
+
+```sh
+python spam_the_ane.py
+```
+
+Runs prediction continuously with CPU + ANE eligible and, four times a second,
+overwrites a single line with the current throughput (a ~3-second exponential
+moving average, in iterations/sec) followed by a sparkline of that value over
+time, scaled from just below the lowest rate seen up to the highest. Handy for
+watching the ANE under sustained load — e.g. alongside
+`powermetrics` or `asitop`. Ctrl-C to stop. Needs `exerciser.mlpackage` (run
+`makemodel.py` first).
+
+## Cleanup
+
+```sh
+./cleanup.sh
+```
+
+Removes everything the setup and build steps create — the `.venv` and any
+`*.mlpackage`. Safe to re-run.
+
 ## Author
 
 **Andrew Benson**

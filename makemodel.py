@@ -12,7 +12,7 @@ import coremltools as ct
 from coremltools.converters.mil import Builder as mb
 
 INPUT_NAME = "image"
-BATCH, CHANNELS, HEIGHT, WIDTH = 1, 3, 1024, 1024
+BATCH, CHANNELS, HEIGHT, WIDTH = 1, 3, 256, 256
 
 # Number of conv layers and their width. Turn these up to make it heavier.
 NUM_LAYERS = 16

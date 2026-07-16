@@ -20,7 +20,7 @@ import coremltools as ct
 
 MODEL_PATH = "exerciser.mlpackage"
 INPUT_NAME = "image"
-SHAPE = (1, 3, 1024, 1024)
+SHAPE = (1, 3, 256, 256)
 
 seconds_per_mode = float(sys.argv[1]) if len(sys.argv) > 1 else 15.0
 
